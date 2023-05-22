@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* font-family: 'Lato', sans-serif; */
+
+:root {
+    --primaryColor: #f09d51;
+    --mainWhite : #fff;
+    --mainBlack : #222;
+    --mainGrey : #ececec;
+    --mainSpacing : 0.1rem;
+    --mainTransition : all 0.3s linear;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--mainBlack);
+    background: var(--mainWhite);
+    font-family: 'Lato', sans-serif;
+}
+
+/* --- Navbar--- */
+
+.navbar {
+    background: var(--mainWhite);
+    position: sticky;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: rgb(231, 226, 221);
+    z-index: 1;
+}
+
+.navbar-center {
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    max-width: 1170px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-icon {
+    font-size: 1.6rem;
+}
+
+.cart-btn {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-items{
+    position: absolute;
+    top: -9px;
+    right: -2px;
+    padding: 0 4px;
+    color: var(--mainWhite);
+    background-color: var(--primaryColor);
+    border-radius: 40%;
+}
