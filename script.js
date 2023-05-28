@@ -9,7 +9,6 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".product-items-container");
 
-console.log(clearCartBtn);
 
 // cart
 let cart = [];
@@ -45,7 +44,7 @@ class UI {
                <div class="img-container">
                 <img src=${element.image} alt="product 1" class="product-img">
                 <button class="shopping-bag-btn" data-id=${element.id}>
-                <i class="fas fa-shopping-cart"></i> add to bag</button>
+                <i class="fas fa-shopping-cart"></i> add to cart</button>
                </div> 
                <h3>${element.title}</h3>
                <h4>$${element.price}</h4>
@@ -179,7 +178,41 @@ class UI {
             this.clearCart();
         })
 
-        // cart functionality
+        // cart functionality'+' and '-'
+
+        cartContent.addEventListener('click', (e)=> {
+            //adding events to 'remove' in cart content
+            if(e.target.classList.contains('remove-item')){
+                cartContent.removeChild(e.target.parentElement.parentElement);
+                this.removeItem(e.target.attributes[1].value);
+            }
+            //adding events to '+' in cart content
+            else if(e.target.classList.contains('fa-plus')){
+                let id = e.target.attributes[1].value;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount + 1;
+                e.target.nextElementSibling.innerText = tempItem.amount;
+                Storage.saveCart(cart);
+                this.setCartValues(cart);
+                
+            }
+            //adding events to '-' in cart content
+            else if(e.target.classList.contains('fa-minus')){
+                let id = e.target.attributes[1].value;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount - 1;
+                if(tempItem.amount>0){ 
+                e.target.previousElementSibling.innerText = tempItem.amount;
+                this.setCartValues(cart);
+                Storage.saveCart(cart);
+                }
+                else{
+                     cartContent.removeChild(e.target.parentElement.parentElement);
+                     this.removeItem(id);
+                }
+            }
+
+        })
     }
 
     clearCart(){
@@ -189,7 +222,7 @@ class UI {
         while(cartContent.children.length > 0) {
             cartContent.removeChild(cartContent.children[0]);
         }
-        this.hideCart();
+        // this.hideCart();
     }
 
     removeItem(id){
